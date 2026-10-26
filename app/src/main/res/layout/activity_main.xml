@@ -38,6 +38,7 @@
 
     <CheckBox android:id="@+id/cbFacebook" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Facebook" />
     <CheckBox android:id="@+id/cbTiktok" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TikTok" />
+    <CheckBox android:id="@+id/cbDieuKhoan" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Đồng ý với điều khoản sử dụng" />
 
     <Button
         android:id="@+id/btnSubmit"

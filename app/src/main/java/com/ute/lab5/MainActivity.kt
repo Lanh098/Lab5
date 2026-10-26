@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.make(view, "Số điện thoại không hợp lệ (10 số, đầu 03/05/07/08/09)!", Snackbar.LENGTH_LONG).show()
             } else if (!FormValidator.isValidPassword(matKhau)) {
                 Snackbar.make(view, "Mật khẩu phải từ 6 ký tự trở lên!", Snackbar.LENGTH_LONG).show()
+            } else if (!binding.cbDieuKhoan.isChecked) {
+                Snackbar.make(view, "Bạn phải đồng ý với điều khoản sử dụng!", Snackbar.LENGTH_LONG).show()
             }
             else {
                 // Hợp lệ -> Chuyển sang màn hình trang chủ
