@@ -3,6 +3,9 @@ plugins {
 }
 
 android {
+    buildFeatures{
+        viewBinding = true
+    }
     namespace = "com.ute.lab5"
     compileSdk {
         version = release(37)
