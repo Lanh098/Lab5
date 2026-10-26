@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.make(view, "Mật khẩu phải từ 6 ký tự trở lên!", Snackbar.LENGTH_LONG).show()
             } else if (!binding.cbDieuKhoan.isChecked) {
                 Snackbar.make(view, "Bạn phải đồng ý với điều khoản sử dụng!", Snackbar.LENGTH_LONG).show()
+            } else if (binding.rgGender.checkedRadioButtonId == -1) {
+                Snackbar.make(view, "Bạn phải chọn giới tính!", Snackbar.LENGTH_LONG).show()
             }
             else {
                 // Hợp lệ -> Chuyển sang màn hình trang chủ
