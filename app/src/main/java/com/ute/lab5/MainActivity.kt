@@ -2,10 +2,9 @@ package com.ute.lab5
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doAfterTextChanged
 import com.ute.lab5.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -14,25 +13,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // Nhập chữ
-        binding.etName.doAfterTextChanged {
-            Toast.makeText(this, "Đang gõ: $it", Toast.LENGTH_SHORT).show()
-        }
-        //Giới tính
-        binding.rgGender.setOnCheckedChangeListener { _, checkedId ->
-            val gioiTinh = if (checkedId == R.id.rbMale) "Nam" else "Nữ"
-            Toast.makeText(this, "Chọn: $gioiTinh", Toast.LENGTH_SHORT).show()
+
+        // Nút Đăng ký
+        binding.btnSubmit.setOnClickListener { view ->
+            val ten = binding.etName.text.toString()
+            val email = binding.etEmail.text.toString()
+            val matKhau = binding.etPW.text.toString()
+            val sdt = binding.etPhone.text.toString()
+
+            // Kiểm tra điều kiện bằng FormValidator
+            if (!FormValidator.isValidName(ten)) {
+                Snackbar.make(view, "Họ tên phải từ 3 ký tự trở lên!", Snackbar.LENGTH_LONG).show()
+            } else if (!FormValidator.isValidEmail(email)) {
+                Snackbar.make(view, "Email không đúng định dạng!", Snackbar.LENGTH_LONG).show()
+            } else if (!FormValidator.isValidPhone(sdt)) {
+                Snackbar.make(view, "Số điện thoại không hợp lệ (10 số, đầu 03/05/07/08/09)!", Snackbar.LENGTH_LONG).show()
+            } else if (!FormValidator.isValidPassword(matKhau)) {
+                Snackbar.make(view, "Mật khẩu phải từ 6 ký tự trở lên!", Snackbar.LENGTH_LONG).show()
+            }
+            else {
+                // Hợp lệ -> Chuyển sang màn hình trang chủ
+                val SinhVien = SinhVien(ten, email, matKhau, sdt)
+                val intent = Intent(this, DetailActivity::class.java)
+                intent.putExtra("SV_INFO", SinhVien)
+                startActivity(intent)
+            }
         }
 
-        //Checkbox
-        binding.cbFacebook.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(this, "Facebook: $isChecked", Toast.LENGTH_SHORT).show()
-        }
-        //Chuyển màn hình
-        binding.btnSubmit.setOnClickListener {
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("TEN", binding.etName.text.toString())
-            startActivity(intent)
+        // Nút Hủy
+        binding.btnCancel.setOnClickListener {
+            binding.etName.text.clear()
+            binding.etEmail.text.clear()
+            binding.etPW.text.clear()
+            binding.etPhone.text.clear()
+            binding.rgGender.clearCheck()
+            binding.cbFacebook.isChecked = false
+            binding.cbTiktok.isChecked = false
         }
     }
 }
