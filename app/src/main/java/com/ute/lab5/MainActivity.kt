@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             val gioiTinh = if (checkedId == R.id.rbMale) "Nam" else "Nữ"
             Toast.makeText(this, "Chọn: $gioiTinh", Toast.LENGTH_SHORT).show()
         }
+
         //Checkbox
         binding.cbFacebook.setOnCheckedChangeListener { _, isChecked ->
             Toast.makeText(this, "Facebook: $isChecked", Toast.LENGTH_SHORT).show()
