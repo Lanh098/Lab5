@@ -12,8 +12,13 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val ten = intent.getStringExtra("TEN")
-        binding.tvResult.text = "Thông tin tân sinh viên:\nHọ tên: $ten"
+        val ThongTin = intent.getSerializableExtra("SV_INFO") as? SinhVien
+        if (ThongTin != null) {
+            binding.tvResult1.text = "Họ tên : ${ThongTin.ten}"
+            binding.tvResult2.text = "Email : ${ThongTin.email}"
+            binding.tvResult3.text = "Mật khẩu : ${ThongTin.matKhau}"
+            binding.tvResult4.text = "Số điện thoại : ${ThongTin.sdt}"
+        }
 
         binding.btnBack.setOnClickListener {
             finish()
